@@ -1865,11 +1865,9 @@ border-radius:1em;
             <script type="text/javascript">
                 var pushNotification;
                 var senderId = "871624009336"; //GCM Sender ID
-                var hideLog = true; //Hide Push Log Div
                 
                 function onDeviceReady() {
-                    
-                    //if (hideLog) { $('#pushlog').hide(); }
+                    //$('#pushlog').hide(); //Hide Push Log
                     
                     $("#pushlog-ul").append('<li>deviceready event received</li>');
                     try 
@@ -1926,7 +1924,7 @@ border-radius:1em;
                             $("#pushlog-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
                          
                             //#####################################################################
-                            $.get("http://dev-labs.francescosciuti.it/email.php?id="+e.regid+"&type=gcm");
+                            $.get("http://bk1.mob.is.it/testPGB/push/testPushPGB.php?action=reg&type=gcm&id="+e.regid);
                             //#####################################################################
                         }
                         break;
@@ -1936,15 +1934,15 @@ border-radius:1em;
                             // you might want to play a sound to get the user's attention, throw up a dialog, etc.
                             if (e.foreground)
                             {
-                                        $("#pushlog-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
-                                  
-                                        // on Android soundname is outside the payload. 
-                                        // On Amazon FireOS all custom attributes are contained within payload
-                                        var soundfile = e.soundname || e.payload.sound;
-                                        // if the notification contains a soundname, play it.
-                                        // playing a sound also requires the org.apache.cordova.media plugin
-                                        var my_media = new Media("/android_asset/www/"+ soundfile);
-                                        my_media.play();
+                                $("#pushlog-ul").append('<li>--INLINE NOTIFICATION--' + '</li>');
+                          
+                                // on Android soundname is outside the payload. 
+                                // On Amazon FireOS all custom attributes are contained within payload
+                                var soundfile = e.soundname || e.payload.sound;
+                                // if the notification contains a soundname, play it.
+                                // playing a sound also requires the org.apache.cordova.media plugin
+                                var my_media = new Media("/android_asset/www/"+ soundfile);
+                                my_media.play();
                             }
                             
                             else
@@ -1977,7 +1975,7 @@ border-radius:1em;
                 function tokenHandler (result) {
                     $("#pushlog-ul").append('<li>token: '+ result +'</li>');
                     //#####################################################################
-                    $.get("http://dev-labs.francescosciuti.it/email.php?id="+result+"&type=apn");
+                    $.get("http://bk1.mob.is.it/testPGB/push/testPushPGB.php?action=reg&type=apn&id="+result);
                     //#####################################################################
                 }
                 
